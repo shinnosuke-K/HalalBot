@@ -34,6 +34,13 @@ func main() {
 					if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
 						log.Print(err)
 					}
+				case *linebot.ImageMessage:
+					image, err := bot.GetMessageContent(message.ID).Do()
+					defer image.Content.Close()
+					if err != nil {
+						log.Print(err)
+					}
+					log.Print(image.Content)
 				}
 			}
 		}
