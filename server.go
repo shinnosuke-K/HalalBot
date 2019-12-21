@@ -52,7 +52,10 @@ func main() {
 					}
 					log.Print("saved images!")
 
-					if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage("static/img/"+message.ID+".jpg", "static/img/"+message.ID+".jpg")).Do(); err != nil {
+					originalURL := "https://halal-bot.herokuapp.com/static/img/" + message.ID + ".jpg"
+					previewURL := "https://halal-bot.herokuapp.com/static/img/" + message.ID + ".jpg"
+
+					if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(originalURL, previewURL)).Do(); err != nil {
 						log.Print(err)
 					}
 				}
