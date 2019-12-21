@@ -1,0 +1,15 @@
+{
+	"ImportPath": "github.com/HalalBot",
+	"GoVersion": "go1.13",
+	"GodepVersion": "v80",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/line/line-bot-sdk-go/linebot",
+			"Comment": "v6.4.0-20-g42fa460",
+			"Rev": "42fa4600ac24cf67feebad691252304d39684784"
+		}
+	]
+}
