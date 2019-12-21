@@ -52,8 +52,8 @@ func main() {
 					}
 					log.Print("saved images!")
 
-					originalURL := "https://halal-bot.herokuapp.com/static/img/sample.jpeg"
-					previewURL := "https://halal-bot.herokuapp.com/static/img/sample.jpeg"
+					originalURL := "https://drive.google.com/open?id=1qEFKehAI6ipQ89ejq3PDnjKiXKbXYJwO" //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
+					previewURL := "https://drive.google.com/open?id=1qEFKehAI6ipQ89ejq3PDnjKiXKbXYJwO"  //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
 
 					if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(originalURL, previewURL)).Do(); err != nil {
 						log.Print(err)
