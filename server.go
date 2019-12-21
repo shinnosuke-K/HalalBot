@@ -41,7 +41,7 @@ func main() {
 					if err != nil {
 						log.Print(err)
 					}
-					imgFile, err := os.OpenFile("static/img/"+message.ID+"jpg", os.O_CREATE, 0600)
+					imgFile, err := os.OpenFile("static/img/"+message.ID+".jpg", os.O_CREATE, 0600)
 					buf := make([]byte, 1024)
 					for {
 						n, err := image.Content.Read(buf)
@@ -51,6 +51,10 @@ func main() {
 						imgFile.Write(buf[:n])
 					}
 					log.Print("saved images!")
+
+					if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage("static/img/"+message.ID+".jpg", "static/img/"+message.ID+".jpg")).Do(); err != nil {
+						log.Print(err)
+					}
 				}
 			}
 		}
