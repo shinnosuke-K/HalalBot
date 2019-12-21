@@ -36,10 +36,21 @@ func main() {
 						log.Print(err)
 					}
 				case *linebot.ImageMessage:
-					log.Print(message)
-					if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(message.OriginalContentURL, message.PreviewImageURL)).Do(); err != nil {
+					image, err := bot.GetMessageContent(message.ID).Do()
+					defer image.Content.Close()
+					if err != nil {
 						log.Print(err)
 					}
+					imgFile, err := os.OpenFile("static/img/"+message.ID+"jpg", os.O_CREATE, 0600)
+					buf := make([]byte, 1024)
+					for {
+						n, err := image.Content.Read(buf)
+						if n == 0 || err != nil {
+							break
+						}
+						imgFile.Write(buf[:n])
+					}
+					log.Print("saved images!")
 				}
 			}
 		}
