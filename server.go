@@ -2,7 +2,6 @@ package main
 
 import (
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -49,10 +48,8 @@ func main() {
 
 					_, err = io.Copy(imageFile, image.Content)
 
-					files, _ := ioutil.ReadDir("./static/img/")
-					for _, f := range files {
-						log.Print(f.Name())
-					}
+					files, _ := os.Open("./static/img/img.png")
+					log.Print(files)
 
 					ocr.PosOCR()
 					log.Print("2")
