@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"os"
 
+	errorHand "github.com/HalalBot/error"
+
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
@@ -13,9 +15,8 @@ func main() {
 		os.Getenv("CHANNEL_SECRET"),
 		os.Getenv("CHANNEL_TOKEN"),
 	)
-	if err != nil {
-		log.Fatal(err)
-	}
+
+	errorHand.HandleError(err)
 
 	http.HandleFunc("/callback", func(w http.ResponseWriter, req *http.Request) {
 		events, err := bot.ParseRequest(req)
@@ -38,9 +39,7 @@ func main() {
 				case *linebot.ImageMessage:
 					image, err := bot.GetMessageContent(message.ID).Do()
 					defer image.Content.Close()
-					if err != nil {
-						log.Print(err)
-					}
+					errorHand.HandleError(err)
 					imgFile, err := os.OpenFile("static/img/"+message.ID+".jpg", os.O_CREATE, 0600)
 					buf := make([]byte, 1024)
 					for {
@@ -52,8 +51,8 @@ func main() {
 					}
 					log.Print("saved images!")
 
-					originalURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small" //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
-					previewURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small"  //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
+					originalURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small " //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
+					previewURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small"   //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
 
 					if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(originalURL, previewURL)).Do(); err != nil {
 						log.Print(err)
@@ -62,9 +61,7 @@ func main() {
 			}
 		}
 	})
-
-	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
-		log.Fatal(err)
-	}
+	err = http.ListenAndServe(":"+os.Getenv("PORT"), nil)
+	errorHand.HandleError(err)
 
 }
