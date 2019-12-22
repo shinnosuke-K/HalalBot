@@ -37,7 +37,7 @@ func foodContain(text string) bool {
 	return false
 }
 
-func PosOCR(image io.ReadCloser) {
+func PosOCR(image io.Reader) {
 	url := "https://ocr-devday19.linebrain.ai/v1/recognition"
 	entrance := "detection"
 	fieldName := "image"

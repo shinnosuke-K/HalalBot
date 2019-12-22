@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"reflect"
 
 	"github.com/HalalBot/ocr"
 
@@ -34,7 +35,6 @@ func main() {
 			if event.Type == linebot.EventTypeMessage {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
-					log.Print(message)
 					if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
 						log.Print(err)
 					}
@@ -43,7 +43,7 @@ func main() {
 					defer image.Content.Close()
 					errorHand.HandleError(err)
 
-					log.Print("1")
+					log.Print(reflect.TypeOf(image.Content))
 					ocr.PosOCR(image.Content)
 					log.Print("2")
 
