@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bytes"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -42,9 +44,9 @@ func main() {
 					defer image.Content.Close()
 					errorHand.HandleError(err)
 
-					var buf []byte
-					log.Print(image.Content.Read(buf))
-					ocr.PosOCR(image.Content)
+					imageData, _ := ioutil.ReadAll(image.Content)
+					a := bytes.NewReader(imageData)
+					ocr.PosOCR(a)
 					log.Print("2")
 
 					//originalURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small " //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
