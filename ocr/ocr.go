@@ -80,6 +80,8 @@ func PosOCR(image io.ReadCloser) {
 	err = json.Unmarshal(jsonBody, &result)
 	errorHand.HandleError(err)
 
+	log.Print(result.Words)
+
 	for num, word := range result.Words {
 		if foodContain(word.Text) {
 			log.Print("NG")
