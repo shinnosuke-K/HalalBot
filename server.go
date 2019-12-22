@@ -46,6 +46,7 @@ func main() {
 
 					imageData, _ := ioutil.ReadAll(image.Content)
 					a := bytes.NewReader(imageData)
+					log.Print(a)
 					ocr.PosOCR(a)
 					log.Print("2")
 
