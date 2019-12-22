@@ -9,7 +9,6 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
-	"reflect"
 	"strings"
 
 	errorHand "github.com/HalalBot/error"
@@ -41,17 +40,15 @@ func PosOCR() {
 	url := "https://ocr-devday19.linebrain.ai/v1/recognition"
 	entrance := "detection"
 	fieldName := "image"
-	imageName := "./static/img/img.png"
+	imageName := "./static/img/sample.jpeg"
 	image, err := os.Open(imageName)
 	errorHand.HandleError(err)
-
-	log.Print(reflect.TypeOf(image))
 
 	body := &bytes.Buffer{}
 	mw := multipart.NewWriter(body)
 
-	fw, err := mw.CreateFormField(fieldName)
-	//fw, err := mw.CreateFormFile(fieldName, "")
+	//fw, err := mw.CreateFormField(fieldName)
+	fw, err := mw.CreateFormFile(fieldName, "img.png")
 	_, err = io.Copy(fw, image)
 	errorHand.HandleError(err)
 
