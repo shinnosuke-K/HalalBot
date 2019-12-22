@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/HalalBot/ocr"
+
 	errorHand "github.com/HalalBot/error"
 
 	"github.com/line/line-bot-sdk-go/linebot"
@@ -40,16 +42,8 @@ func main() {
 					image, err := bot.GetMessageContent(message.ID).Do()
 					defer image.Content.Close()
 					errorHand.HandleError(err)
-					imgFile, err := os.OpenFile("static/img/"+message.ID+".jpg", os.O_CREATE, 0600)
-					buf := make([]byte, 1024)
-					for {
-						n, err := image.Content.Read(buf)
-						if n == 0 || err != nil {
-							break
-						}
-						imgFile.Write(buf[:n])
-					}
-					log.Print("saved images!")
+
+					ocr.PosOCR(image.Content)
 
 					originalURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small " //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
 					previewURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small"   //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"

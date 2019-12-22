@@ -36,18 +36,19 @@ func foodContain(text string) bool {
 	return false
 }
 
-func PosOCR() {
+func PosOCR(image io.Reader) {
 	url := "https://ocr-devday19.linebrain.ai/v1/recognition"
 	entrance := "detection"
 	fieldName := "image"
-	imageName := ""
-	image, err := os.Open(imageName)
-	errorHand.HandleError(err)
+	//imageName := ""
+	//image, err := os.Open(imageName)
+	//errorHand.HandleError(err)
 
 	body := &bytes.Buffer{}
 	mw := multipart.NewWriter(body)
 
-	fw, err := mw.CreateFormFile(fieldName, imageName)
+	fw, err := mw.CreateFormField(fieldName)
+	//fw, err := mw.CreateFormFile(fieldName, "")
 	_, err = io.Copy(fw, image)
 	errorHand.HandleError(err)
 
