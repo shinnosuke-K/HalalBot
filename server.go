@@ -4,7 +4,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"reflect"
 
 	"github.com/HalalBot/ocr"
 
@@ -43,7 +42,8 @@ func main() {
 					defer image.Content.Close()
 					errorHand.HandleError(err)
 
-					log.Print(reflect.TypeOf(image.Content))
+					var buf []byte
+					log.Print(image.Content.Read(buf))
 					ocr.PosOCR(image.Content)
 					log.Print("2")
 
