@@ -1,6 +1,18 @@
 package ocr
 
-import "strings"
+import (
+	"bytes"
+	"encoding/json"
+	"io"
+	"io/ioutil"
+	"log"
+	"mime/multipart"
+	"net/http"
+	"os"
+	"strings"
+
+	errorHand "github.com/HalalBot/error"
+)
 
 type ResultsWords struct {
 	BoundingBox [][]float64
@@ -22,4 +34,54 @@ func foodContain(text string) bool {
 		}
 	}
 	return false
+}
+
+func PosOCR() {
+	url := "https://ocr-devday19.linebrain.ai/v1/recognition"
+	entrance := "detection"
+	fieldName := "image"
+	imageName := ""
+	image, err := os.Open(imageName)
+	errorHand.HandleError(err)
+
+	body := &bytes.Buffer{}
+	mw := multipart.NewWriter(body)
+
+	fw, err := mw.CreateFormFile(fieldName, imageName)
+	_, err = io.Copy(fw, image)
+	errorHand.HandleError(err)
+
+	err = mw.WriteField("entrance", entrance)
+	errorHand.HandleError(err)
+
+	err = mw.WriteField("segments", "false")
+	errorHand.HandleError(err)
+
+	contentType := mw.FormDataContentType()
+
+	err = mw.Close()
+	errorHand.HandleError(err)
+
+	req, err := http.NewRequest(http.MethodPost, url, body)
+	req.Header.Set("Content-Type", contentType)
+	req.Header.Set("X-ClovaOCR-Service-ID", os.Getenv("ClovaOCR_ID"))
+
+	resp, err := http.DefaultClient.Do(req)
+	errorHand.HandleError(err)
+	defer resp.Body.Close()
+
+	jsonBody, err := ioutil.ReadAll(resp.Body)
+
+	var result Results
+	err = json.Unmarshal(jsonBody, &result)
+	errorHand.HandleError(err)
+
+	for num, word := range result.Words {
+		if foodContain(word.Text) {
+			log.Print("NG")
+			break
+		} else if num == len(result.Words)-1 {
+			log.Print("OK")
+		}
+	}
 }
