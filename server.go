@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"io"
 	"io/ioutil"
 	"log"
@@ -55,9 +54,7 @@ func main() {
 						log.Print(f.Name())
 					}
 
-					imageData, _ := ioutil.ReadAll(image.Content)
-					a := bytes.NewReader(imageData)
-					ocr.PosOCR(a)
+					ocr.PosOCR()
 					log.Print("2")
 
 					//originalURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small " //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
