@@ -2,6 +2,9 @@
 	"ImportPath": "github.com/HalalBot",
 	"GoVersion": "go1.13",
 	"GodepVersion": "v80",
+	"Packages": [
+		"./..."
+	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/aws",
@@ -19,9 +22,8 @@
 			"Rev": "b88d4f840523b85d7137662d71d4a267bae38256"
 		},
 		{
-			"ImportPath": "github.com/aws/aws-sdk-go/aws/client",
-			"Comment": "v1.25.13-90-gb88d4f840",
-			"Rev": "b88d4f840523b85d7137662d71d4a267bae38256"
+			"ImportPath": "",
+			"Rev": "0e5773b0d330e3f337077cb1eb256935c8a9e11b"
 		},
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/aws/client/metadata",
@@ -182,6 +184,24 @@
 			"ImportPath": "github.com/line/line-bot-sdk-go/linebot",
 			"Comment": "v6.4.0-20-g42fa460",
 			"Rev": "42fa4600ac24cf67feebad691252304d39684784"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/vendor/github.com/jmespath/go-jmespath",
+			"Comment": "v1.25.13-90-gb88d4f840",
+			"Rev": "b88d4f840523b85d7137662d71d4a267bae38256"
+		},
+		{
+			"ImportPath": "github.com/HalalBot/error",
+			"Rev": "0e5773b0d330e3f337077cb1eb256935c8a9e11b"
+		},
+		{
+			"ImportPath": "github.com/HalalBot/ocr",
+			"Rev": "0e5773b0d330e3f337077cb1eb256935c8a9e11b"
+		},
+		{
+			"ImportPath": "github.com/aws/aws-sdk-go/aws/client",
+			"Comment": "v1.25.13-90-gb88d4f840",
+			"Rev": "b88d4f840523b85d7137662d71d4a267bae38256"
 		}
 	]
 }
