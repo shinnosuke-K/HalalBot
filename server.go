@@ -42,7 +42,13 @@ func main() {
 					defer image.Content.Close()
 					errorHand.HandleError(err)
 
-					ocr.DoOCR(image.Content)
+					replyMess := ocr.DoOCR(image.Content)
+
+					for _, repMes := range replyMess {
+						if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(repMes)).Do(); err != nil {
+							log.Print(err)
+						}
+					}
 
 					//originalURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small " //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
 					//previewURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small"   //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
