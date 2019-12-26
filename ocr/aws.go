@@ -4,6 +4,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"os"
 
 	errorHand "github.com/HalalBot/error"
 
@@ -21,7 +22,7 @@ func DoOCR(imageContent io.ReadCloser) {
 
 	sess := session.Must(session.NewSession())
 
-	svc := rekognition.New(sess, aws.NewConfig().WithRegion("ap-northeast-1"))
+	svc := rekognition.New(sess, aws.NewConfig().WithRegion(os.Getenv("AWS_REGION")))
 
 	params := &rekognition.DetectTextInput{
 		Image: &rekognition.Image{
