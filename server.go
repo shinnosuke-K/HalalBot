@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io"
 	"log"
 	"net/http"
 	"os"
@@ -43,16 +42,7 @@ func main() {
 					defer image.Content.Close()
 					errorHand.HandleError(err)
 
-					imageFile, err := os.Create("./static/img/img.png")
-					errorHand.HandleError(err)
-
-					_, err = io.Copy(imageFile, image.Content)
-
-					files, _ := os.Open("./static/img/img.png")
-					log.Print(files)
-
-					ocr.PosOCR()
-					log.Print("2")
+					ocr.DoOCR(image.Content)
 
 					//originalURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small " //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
 					//previewURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small"   //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
