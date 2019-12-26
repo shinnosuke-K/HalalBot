@@ -2,6 +2,9 @@
 	"ImportPath": "github.com/HalalBot",
 	"GoVersion": "go1.13",
 	"GodepVersion": "v80",
+	"Packages": [
+		"."
+	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/aws/aws-sdk-go/aws",
