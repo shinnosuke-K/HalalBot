@@ -32,7 +32,7 @@ func DoOCR(imageContent io.ReadCloser) {
 
 	resp, err := svc.DetectText(params)
 	errorHand.HandleError(err)
-	for text := range resp.TextDetections {
+	for _, text := range resp.TextDetections {
 		log.Print(text)
 	}
 
