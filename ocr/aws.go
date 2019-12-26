@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"reflect"
 
 	errorHand "github.com/HalalBot/error"
 
@@ -33,6 +32,8 @@ func DoOCR(imageContent io.ReadCloser) {
 
 	resp, err := svc.DetectText(params)
 	errorHand.HandleError(err)
+	for text := range resp.TextDetections {
+		log.Print(text)
+	}
 
-	log.Print(reflect.TypeOf(resp))
 }
