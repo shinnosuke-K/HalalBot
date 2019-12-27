@@ -39,5 +39,5 @@ func DoOCR(imageContent io.ReadCloser) string {
 			log.Print(*text.DetectedText)
 		}
 	}
-	return ocrText
+	return ocrText[:len(ocrText)-2]
 }
