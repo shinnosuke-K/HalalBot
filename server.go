@@ -46,23 +46,13 @@ func main() {
 
 					replyMess := ocr.DoOCR(image.Content)
 
-					//for _, repMes := range replyMess {
-					if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(string(replyMess))).Do(); err != nil {
+					if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(replyMess)).Do(); err != nil {
 						log.Print(err)
 					}
-					//}
-
-					//originalURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small " //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
-					//previewURL := "https://pbs.twimg.com/media/ELWG8dcU8AAG1Hi.jpg:small"   //"https://halal-bot.herokuapp.com/static/img/sample.jpeg"
-					//
-					//if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(originalURL, previewURL)).Do(); err != nil {
-					//	log.Print(err)
-					//}
 				}
 			}
 		}
 	})
 	err = http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 	errorHand.HandleError(err)
-
 }
