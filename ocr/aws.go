@@ -15,7 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 )
 
-func DoOCR(imageContent io.ReadCloser) []string {
+func DoOCR(imageContent io.ReadCloser) []map[string]string {
 
 	bytes, err := ioutil.ReadAll(imageContent)
 	errorHand.HandleError(err)
@@ -32,9 +32,12 @@ func DoOCR(imageContent io.ReadCloser) []string {
 
 	resp, err := svc.DetectText(params)
 	errorHand.HandleError(err)
-	var ocrText []string
+	var ocrText []map[string]string
+	test := map[string]string{}
 	for _, text := range resp.TextDetections {
-		ocrText = append(ocrText, *text.DetectedText)
+		test["type"] = "text"
+		test["text"] = *text.DetectedText
+		ocrText = append(ocrText, test)
 		log.Print(*text.DetectedText)
 	}
 
