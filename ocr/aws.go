@@ -34,10 +34,10 @@ func DoOCR(imageContent io.ReadCloser) string {
 	errorHand.HandleError(err)
 	var ocrText string
 	for _, text := range resp.TextDetections {
-
-		ocrText += *text.DetectedText + "\n"
-		log.Print(*text.DetectedText)
+		if *text.Confidence > 90 {
+			ocrText += *text.DetectedText + "\n"
+			log.Print(*text.DetectedText)
+		}
 	}
-
 	return ocrText
 }
