@@ -42,10 +42,9 @@ func main() {
 					defer image.Content.Close()
 					errorHand.HandleError(err)
 
-					replyMess, err := linebot.TextMessage.MarshalJSON(ocr.DoOCR(image.Content))
 					errorHand.HandleError(err)
 
-					log.Print(replyMess)
+					replyMess := ocr.DoOCR(image.Content)
 
 					//for _, repMes := range replyMess {
 					if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(string(replyMess))).Do(); err != nil {
