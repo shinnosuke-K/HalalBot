@@ -42,8 +42,6 @@ func main() {
 					defer image.Content.Close()
 					errorHand.HandleError(err)
 
-					errorHand.HandleError(err)
-
 					replyMess := ocr.DoOCR(image.Content)
 
 					if _, err := bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(replyMess)).Do(); err != nil {
