@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/HalalBot/ocr"
+	"github.com/shinnosuke-K/HalalBot/ocr"
 
-	errorHand "github.com/HalalBot/error"
+	errorHand "github.com/shinnosuke-K/HalalBot/error"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )

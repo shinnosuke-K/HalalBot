@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	errorHand "github.com/HalalBot/error"
+	errorHand "github.com/shinnosuke-K/HalalBot/error"
 
 	"github.com/aws/aws-sdk-go/aws"
 
