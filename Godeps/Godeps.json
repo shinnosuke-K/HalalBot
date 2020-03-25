@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/shinnosuke/HalalBot",
+	"ImportPath": "github.com/shinnosuke-K/HalalBot",
 	"GoVersion": "go1.13",
 	"GodepVersion": "v80",
 	"Packages": [
