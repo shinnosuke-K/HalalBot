@@ -11,7 +11,7 @@ import (
 	"os"
 	"strings"
 
-	errorHand "github.com/HalalBot/error"
+	errorHand "github.com/shinnosuke-K/HalalBot/error"
 )
 
 type ResultsWords struct {
